@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_identity_pdf" model="ir.actions.report">
+       <field name="name">Identity PDF</field>
+       <field name="model">piradoba.identity</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">Piradoba.report_identity_pdf</field>
+       <field name="report_file">Piradoba.report_identity_pdf</field>
+       <field name="binding_model_id" ref="model_piradoba_identity"/>
+    </record>
+</odoo>

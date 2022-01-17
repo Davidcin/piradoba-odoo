@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_identity_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div>
+                                <h1><span t-field="o.first_name"/> <span t-field="o.last_name"/></h1>
+                            </div>
+                            <hr></hr>
+
+                            <img t-if="o.img" t-att-src="'data:image/png;base64,%s' % to_text(o.img)" style="max-height: 250px; max-width: 250px; opacity:0.95;"/>
+                            <hr></hr>
+                            <div>
+                                <p><b>First Name:</b> <span t-field="o.first_name"/></p>
+                                <hr></hr>
+                                <p><b>Last Name:</b> <span t-field="o.last_name"/></p>
+                                <hr></hr>
+                                <p><b>Citizenship:</b> <span t-field="o.citizen"/></p>
+                                <hr></hr>
+                                <p><b>Gender:</b> <span t-field="o.gender"/></p>
+                                <hr></hr>
+                                <p><b>Personal Number:</b> <span t-field="o.personal_number"/></p>
+                                <hr></hr>
+                                <p><b>Birthday Date:</b> <span t-field="o.birthday_date"/></p>
+                                <hr></hr>
+                                <p><b>Expiry Date:</b> <span t-field="o.expiry_date"/></p>
+                                <hr></hr>
+                                <p><b>Birth Place:</b> <span t-field="o.birth_place"/></p>
+                                <hr></hr>
+                                <p><b>Issue Date:</b> <span t-field="o.issue_date"/></p>
+                                <hr></hr>
+                                <p><b>Department:</b> <span t-field="o.department"/></p>
+                                <hr></hr>
+                                <p><b>Characteristic:</b> <span t-field="o.characteristic"/></p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+</odoo>

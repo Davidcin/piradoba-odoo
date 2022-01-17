@@ -1,0 +1,1 @@
+from . import piradoba, characteristic, department

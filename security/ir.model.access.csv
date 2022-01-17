@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_piradoba_identity,access.piradoba.identity,model_piradoba_identity,,1,1,1,1
+access_piradoba_department,access.piradoba.department,model_piradoba_department,,1,1,1,1
+access_piradoba_characteristic,access.piradoba.characteristic,model_piradoba_characteristic,,1,1,1,1
