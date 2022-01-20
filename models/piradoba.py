@@ -2,9 +2,11 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+
 class Identity(models.Model):
     _name = "piradoba.identity"
     _description = "Identity"
+    _rec_name = 'personal_number'
 
     img = fields.Binary(string="Image", required=True)
     first_name = fields.Char(string='First Name', size=20, required=True)
@@ -21,27 +23,22 @@ class Identity(models.Model):
     expiry_date = fields.Date(string='Expiry Date', required=True)
     birth_place = fields.Char(string='Birth Place', size=20, required=True)
     issue_date = fields.Date(string='Issue Date', required=True)
-    department = fields.Many2one('piradoba.department', string= 'Department', required=True)
-    characteristic = fields.Many2many('piradoba.characteristic', string= 'Characteristics', required=True)
+    department = fields.Many2one('piradoba.department', string='Department', required=True)
+    characteristic = fields.Many2many('piradoba.characteristic', string='Characteristics', required=True)
+
+    _sql_constraints = [
+        ('personal_number_unique',
+         'unique(personal_number)',
+         'Personal number already exists!')
+    ]
 
     @api.constrains("personal_number")
-    def unique(self):
-        for rec in self:
-            personalnum = self.env['piradoba.identity'].search([('personal_number', '=', rec.personal_number), ('id', '!=', rec.id)])
-            if personalnum:
-                raise ValidationError('This personal number already exists!')
-
-    @api.constrains("personal_number")
-    def numeric(self):
-        for rec in self:
-            if rec.personal_number.isnumeric() == False:
-                raise ValidationError('Wrong datatype is used in Personal number field!')
-
-    @api.constrains("personal_number")
-    def num_length(self):
+    def personal_num_check(self):
         for rec in self:
             if len(rec.personal_number) != 11:
                 raise ValidationError('Personal number requires 11 numbers!')
+            if rec.personal_number.isnumeric() is False:
+                raise ValidationError('Wrong datatype is used in Personal number field!')
 
     @api.constrains("citizen")
     def uppercit(self):
@@ -54,15 +51,15 @@ class Identity(models.Model):
     def fnamealpha(self):
         for rec in self:
             if rec.first_name[0].islower():
-                    raise ValidationError('First letter of name must be uppercase!')
+                raise ValidationError('First letter of name must be uppercase!')
 
     @api.constrains("last_name")
     def lnamealpha(self):
         for rec in self:
             if rec.last_name[0].islower():
-                    raise ValidationError('First letter of last name must be uppercase!')
+                raise ValidationError('First letter of last name must be uppercase!')
 
-    @api.constrains("last_name")
+    @api.constrains("birth_place")
     def cityalpha(self):
         for rec in self:
             if rec.birth_place[0].islower():

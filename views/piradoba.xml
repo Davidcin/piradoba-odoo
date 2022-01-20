@@ -89,8 +89,7 @@
                                 <field name="birth_place"/>
                                 <field name="issue_date"/>
                                 <field name="department"/>
-                                <field name="characteristic"/>
-
+                                <field name="characteristic" widget="many2many_tags"/>
                         </tree>
                 </field>
         </record>
@@ -127,7 +126,7 @@
                                                 </group>
                                                 <group>
                                                         <field name="department"/>
-                                                        <field name="characteristic"/>
+                                                        <field name="characteristic" widget="many2many_tags"/>
                                                 </group>
                                         </group>
                                 </sheet>
@@ -135,6 +134,39 @@
                 </field>
         </record>
 
+        <record model="ir.ui.view" id="department_form_view">
+                <field name="name">department.form.view</field>
+                <field name="model">piradoba.department</field>
+                <field name="arch" type="xml">
+                        <form string="Department Form">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                        </group>
+                                        <group>
+                                                <field name="employer" style="width:90%"/>
+                                        </group>
+                                        <group>
+                                                <field name="manager"/>
+                                        </group>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_department_tree">
+                <field name="name">view.department.tree</field>
+                <field name="model">piradoba.department</field>
+                <field name="priority" eval="2"/>
+                <field name="arch" type="xml">
+                        <tree string="Piradoba">
+                                <field name="name"/>
+                                <field name="employer"/>
+                                <field name="manager"/>
+                        </tree>
+                </field>
+        </record>
 
         <record id="piradoba_action" model="ir.actions.act_window">
                 <field name="name">Identity</field>
