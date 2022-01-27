@@ -147,7 +147,7 @@
                                                 <field name="employer" style="width:90%"/>
                                         </group>
                                         <group>
-                                                <field name="manager"/>
+                                                <field name="manager" domain="[('id', 'in' ,employer)]"/>
                                         </group>
                                 </sheet>
                         </form>
